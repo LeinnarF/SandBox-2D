@@ -24,9 +24,7 @@ int main()
 		//Draw
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
-
 		handle.Draw();
-
 		EndDrawing();
 	}
 	CloseWindow();

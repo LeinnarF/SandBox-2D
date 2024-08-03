@@ -9,20 +9,13 @@ Grid::Grid(int width, int height, int cellsize) :
 	m_element()
 {}
 
-void Grid::Draw()
+void Grid::Draw(int type)
 {
 	for (int y = 0; y < m_y; y++)
 	{
 		for (int x = 0; x < m_x; x++)
 		{
-			if (checkCell(y, x, 1))
-				DrawRectangle(x * m_cellsize, y * m_cellsize, m_cellsize, m_cellsize, BEIGE);
-
-			else if (checkCell(y, x, 2))
-				DrawRectangle(x * m_cellsize, y * m_cellsize, m_cellsize, m_cellsize, BLUE);
-
-			else if (checkCell(y, x, 3))
-				DrawRectangle(x * m_cellsize, y * m_cellsize, m_cellsize, m_cellsize, GRAY);
+			m_element->Draw(*this, y, x, type);
 		}
 	}
 }
@@ -33,14 +26,7 @@ void Grid::Update(int value)
 	{
 		for (int x = 0; x < m_x; x++)
 		{
-			if (checkCell(y, x, 1))
-				m_element->Sand(*this, y, x);
-
-			else if (checkCell(y, x, 2))
-				m_element->Water(*this, y, x);
-
-			else if (checkCell(y, x, 3))
-				m_element->Stone(*this, y, x);
+			m_element->Update(*this, y, x, value);
 		}
 	}
 }
@@ -83,15 +69,7 @@ void Grid::addBlock(int mouseX, int mouseY, int value)
 	int x = mouseX / m_cellsize;
 	int y = mouseY / m_cellsize;
 	if (isWithinBounds(y, x) && isEmpty(y, x))
-	{
 		setValue(x, y, value);
-		setValue(x, y + 1, value);
-		setValue(x, y - 1, value);
-		setValue(x + 1, y + 1, value);
-		setValue(x - 1, y + 1, value);
-		setValue(x + 1, y, value);
-		setValue(x - 1, y, value);
-	}
 }
 
 void Grid::erase(int mouseX, int mouseY)

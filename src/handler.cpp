@@ -1,9 +1,8 @@
 #include "handler.h"
 
-
 void Handle::Draw()
 {
-	m_grid.Draw();
+	m_grid.Draw(m_choice);
 }
 
 void Handle::Update()
@@ -11,13 +10,13 @@ void Handle::Update()
 	m_grid.Update(m_choice);
 }
 
-void Handle::InputMouse(int value)
+void Handle::InputMouse(int type)
 {
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
 		int monitor = GetMonitorCount();
 		Vector2 mousePosition = GetMousePosition();
-		m_grid.addBlock((int)mousePosition.x, (int)mousePosition.y, value);
+		m_grid.addBlock((int)mousePosition.x, (int)mousePosition.y, type);
 	}
 	if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
 	{
@@ -38,8 +37,8 @@ void Handle::inputChoice()
 	else if (IsKeyPressed(KEY_THREE))
 		m_choice = 3;
 
-	else if (IsKeyPressed(KEY_ZERO))
-		m_choice = 0;
+	else if (IsKeyPressed(KEY_FOUR))
+		m_choice = 4;
 
 	InputMouse(m_choice);
 
