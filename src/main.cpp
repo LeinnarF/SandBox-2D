@@ -4,14 +4,19 @@
 int main()
 {
 	const int CELL_SIZE = 5;
-	const int WIDTH = 800;
+	const int WIDTH = 1200;
 	const int HEIGHT = 800;
+	const int OFFSET = 100;
 	const char* TITLE = "Sandbox.";
 
 	InitWindow(WIDTH, HEIGHT, TITLE);
 	SetTargetFPS(60);
 
-	Handle handle(WIDTH, HEIGHT, CELL_SIZE);
+	int gridWidth = (WIDTH - OFFSET);
+	int gridHeight = (HEIGHT - OFFSET);
+
+	Handle handle(gridWidth, gridHeight, CELL_SIZE, OFFSET);
+	//handle.DebuggSetValue(0, 0, 3);
 
 	while (!WindowShouldClose())
 	{

@@ -9,17 +9,19 @@ class Grid
 public:
 	Grid(int width, int height, int cellsize);
 
-	void Draw(int type);
-	void Update(int value);
+	void Draw(int offsetY, int offsetX);
+	void Update();
 	void setValue(int x, int y, int value);
 	bool isWithinBounds(int y, int x);
 	bool isEmpty(int y, int x);
 	bool checkCell(int y, int x, int target);
 	void moveCell(int y1, int x1, int y2, int x2);
 	void moveCell(int y1, int x1, int y2, int x2, int swap);
-	void addBlock(int mouseX, int mouseY, int value);
-	void erase(int mouseX, int mouseY);
+	void addBlock(int mouseX, int mouseY, int value, int scale, int offset);
+	void erase(int mouseX, int mouseY, int offset);
 	int getCellsize() { return m_cellsize; }
+	int getWidth() { return m_x; }
+	int getHeight() { return m_y; }
 
 private:
 	int m_x;

@@ -5,8 +5,8 @@ class Element
 {
 public:
 
-	void Draw(Grid& grid, int y, int x, int type);
-	void Update(Grid& grid, int y, int x, int type);
+	void Draw(Grid& grid, int y, int x, int offsety, int offsetx);
+	void Update(Grid& grid, int y, int x);
 
 	void Sand(Grid& grid, int y, int x);
 	void Water(Grid& grid, int y, int x);
