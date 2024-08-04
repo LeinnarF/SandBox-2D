@@ -22,6 +22,7 @@ public:
 	int getCellsize() { return m_cellsize; }
 	int getWidth() { return m_x; }
 	int getHeight() { return m_y; }
+	void moveLiquid(int y, int x, int dispersionRate);
 
 private:
 	int m_x;

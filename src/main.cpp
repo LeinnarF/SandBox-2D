@@ -3,7 +3,7 @@
 
 int main()
 {
-	const int CELL_SIZE = 5;
+	const int CELL_SIZE = 10;
 	const int WIDTH = 1200;
 	const int HEIGHT = 800;
 	const int OFFSET = 100;
@@ -16,7 +16,8 @@ int main()
 	int gridHeight = (HEIGHT - OFFSET);
 
 	Handle handle(gridWidth, gridHeight, CELL_SIZE, OFFSET);
-	//handle.DebuggSetValue(0, 0, 3);
+
+	handle.DebuggSetValue(0, 0, 3);
 
 	while (!WindowShouldClose())
 	{
@@ -28,7 +29,7 @@ int main()
 
 		//Draw
 		BeginDrawing();
-		ClearBackground(RAYWHITE);
+		ClearBackground(BLACK);
 		handle.Draw();
 		EndDrawing();
 	}

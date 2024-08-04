@@ -86,3 +86,63 @@ void Grid::erase(int mouseX, int mouseY, int offset)
 	if (isWithinBounds(y, x) && !isEmpty(y, x))
 		setValue(x, y, 0);
 }
+
+
+void Grid::moveLiquid(int y, int x, int dispersionRate)
+{
+	if (isEmpty(y + 1, x))
+	{
+		moveCell(y, x, y + 1, x);
+	}
+	else if (isEmpty(y + 1, x + 1))
+	{
+		moveCell(y, x, y + 1, x + 1);
+	}
+	else if (isEmpty(y + 1, x - 1))
+	{
+		moveCell(y, x, y + 1, x - 1);
+	}
+	else
+	{
+		for (int i = 1; i <= dispersionRate; ++i)
+		{
+			int rand = GetRandomValue(0, 2);
+			if (rand == 0)
+			{
+				// Check for intermediate occupied cells to the left
+				bool canMoveLeft = true;
+				for (int j = 1; j <= i; ++j)
+				{
+					if (!isEmpty(y, x - j))
+					{
+						canMoveLeft = false;
+						break;
+					}
+				}
+				if (canMoveLeft && isEmpty(y, x - i))
+				{
+					moveCell(y, x, y, x - i);
+					return;
+				}
+			}
+			else
+			{
+				// Check for intermediate occupied cells to the right
+				bool canMoveRight = true;
+				for (int j = 1; j <= i; ++j)
+				{
+					if (!isEmpty(y, x + j))
+					{
+						canMoveRight = false;
+						break;
+					}
+				}
+				if (canMoveRight && isEmpty(y, x + i))
+				{
+					moveCell(y, x, y, x + i);
+					return;
+				}
+			}
+		}
+	}
+}

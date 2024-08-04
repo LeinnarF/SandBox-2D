@@ -1,6 +1,6 @@
 #include "handler.h"
 
-int SCALE = 2;
+int SCALE = 1;
 
 Handle::Handle(int width, int height, int cellsize, int offset) :
 	m_grid(width, height, cellsize), m_choice(1), m_offset(offset)
@@ -56,6 +56,8 @@ void Handle::inputChoice()
 
 	else if (IsKeyPressed(KEY_FOUR))
 		m_choice = 4;
+	else if (IsKeyPressed(KEY_FIVE))
+		m_choice = 5;
 
 	InputMouse(m_choice, m_offset);
 
