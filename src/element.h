@@ -5,7 +5,7 @@ class Element
 {
 public:
 
-	void Draw(Grid& grid, int y, int x, int offsety, int offsetx);
+	void Draw(Grid& grid, int y, int x);
 	void Update(Grid& grid, int y, int x);
 
 	void Sand(Grid& grid, int y, int x);
@@ -13,5 +13,4 @@ public:
 	void Stone(Grid& grid, int y, int x);
 	void Lava(Grid& grid, int y, int x);
 	void Smoke(Grid& grid, int y, int x);
-
 };

@@ -1,21 +1,25 @@
 #include "element.h"
 
-void Element::Draw(Grid& grid, int y, int x, int offsety, int offsetx)
-{
-	if (grid.checkCell(y, x, 0))
-		DrawRectangle(x * grid.getCellsize() + offsetx, y * grid.getCellsize() + offsety, grid.getCellsize(), grid.getCellsize(), WHITE);
+Color sand{ 249, 226, 175, 255 };
+Color water{ 100, 130, 250, 255 };
+Color stone;
+Color lava{ 231, 111, 81, 255 };
 
-	else if (grid.checkCell(y, x, 1))
-		DrawRectangle(x * grid.getCellsize() + offsetx, y * grid.getCellsize() + offsety, grid.getCellsize(), grid.getCellsize(), BEIGE);
+
+void Element::Draw(Grid& grid, int y, int x)
+{
+
+	if (grid.checkCell(y, x, 1))
+		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), sand);
 
 	else if (grid.checkCell(y, x, 2))
-		DrawRectangle(x * grid.getCellsize() + offsetx, y * grid.getCellsize() + offsety, grid.getCellsize(), grid.getCellsize(), BLUE);
+		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), water);
 
 	else if (grid.checkCell(y, x, 3))
-		DrawRectangle(x * grid.getCellsize() + offsetx, y * grid.getCellsize() + offsety, grid.getCellsize(), grid.getCellsize(), GRAY);
+		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), GRAY);
 
 	else if (grid.checkCell(y, x, 4))
-		DrawRectangle(x * grid.getCellsize() + offsetx, y * grid.getCellsize() + offsety, grid.getCellsize(), grid.getCellsize(), ORANGE);
+		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), lava);
 }
 
 void Element::Update(Grid& grid, int y, int x)

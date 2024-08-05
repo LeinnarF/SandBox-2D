@@ -4,18 +4,20 @@
 int main()
 {
 	const int CELL_SIZE = 10;
-	const int WIDTH = 1200;
+	const int WIDTH = 1500;
 	const int HEIGHT = 800;
-	const int OFFSET = 100;
+	const int OFFSET = 0;
 	const char* TITLE = "Sandbox.";
+
+	Color background{ 245, 237, 237, 255 };
 
 	InitWindow(WIDTH, HEIGHT, TITLE);
 	SetTargetFPS(60);
 
-	int gridWidth = (WIDTH - OFFSET);
-	int gridHeight = (HEIGHT - OFFSET);
+	int gridWidth = (WIDTH - 300);
+	int gridHeight = (HEIGHT);
 
-	Handle handle(gridWidth, gridHeight, CELL_SIZE, OFFSET);
+	Handle handle(gridWidth, gridHeight, CELL_SIZE);
 
 	while (!WindowShouldClose())
 	{
@@ -27,7 +29,7 @@ int main()
 
 		//Draw
 		BeginDrawing();
-		ClearBackground(BLACK);
+		ClearBackground(background);
 		handle.Draw();
 		EndDrawing();
 	}
