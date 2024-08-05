@@ -23,6 +23,7 @@ public:
 	int getWidth() { return m_x; }
 	int getHeight() { return m_y; }
 	void moveLiquid(int y, int x, int dispersionRate);
+	void ResetGrid();
 
 private:
 	int m_x;
@@ -31,3 +32,5 @@ private:
 	std::vector<std::vector<int>> m_cells;
 	Element* m_element;
 };
+
+

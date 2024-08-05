@@ -1,15 +1,18 @@
 #include "handler.h"
+#include <string>
 
 int SCALE = 2;
+
+static Color sand{ 254, 237, 192, 255 };
+static Color water{ 117, 149, 224, 255 };
+static Color stone{ 200, 200, 200, 255 };
+static Color lava{ 231, 111, 81, 255 };
 
 Handle::Handle(int width, int height, int cellsize) :
 	m_grid(width, height, cellsize), m_choice(1)
 {};
 
-void Handle::DebuggSetValue(int x, int y, int value)
-{
-	m_grid.setValue(x, y, value);
-}
+
 
 void Handle::Draw()
 {
@@ -55,21 +58,41 @@ void Handle::inputChoice()
 void Handle::UIPanel(int width, int height, Color color)
 {
 	DrawRectangle(width, 0, GetScreenWidth(), height, color);
-	DrawText("Sandbox", width + 20, 10, 30, WHITE);
+	DrawText("Sandbox-2D", width + 20, 10, 30, WHITE);
 
 	const char* element = "init";
+	Color elementColor = WHITE;
 
 	if (m_choice == 1)
+	{
 		element = "Sand";
+		elementColor = sand;
+	}
 	else if (m_choice == 2)
+	{
 		element = "Water";
+		elementColor = water;
+	}
 	else if (m_choice == 3)
+	{
 		element = "Stone";
+		elementColor = stone;
+	}
 	else if (m_choice == 4)
+	{
 		element = "Lava";
+		elementColor = lava;
+	}
 
 	DrawText("Element:", width + 20, 110, 20, WHITE);
-	DrawText(element, width + 110, 110, 20, LIGHTGRAY);
+	DrawText(element, width + 110, 110, 20, elementColor);
+	DrawText("Scale: ", width + 50, 150, 20, WHITE);
+
+	std::string scaleString = std::to_string(SCALE);
+	const char* scaleChar = scaleString.c_str();
+	DrawText(scaleChar, width + 120, 150, 20, WHITE);
+
+	DrawText("Reset", width + 50, 180, 20, WHITE);
 }
 
 void Handle::UIButton(int width)
@@ -77,15 +100,23 @@ void Handle::UIButton(int width)
 	bool mousePressed = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
 	Vector2 mousePoint = GetMousePosition();
 
-	Rectangle buttonSand{ (float)width + 20,50, 30,30 };
-	Rectangle buttonWater{ (float)width + 70, 50, 30,30 };
-	Rectangle buttonStone{ (float)width + 120, 50, 30,30 };
-	Rectangle buttonLava{ (float)width + 170, 50, 30, 30 };
+	Rectangle buttonSand{ (float)width + 20,60, 30,30 };
+	Rectangle buttonWater{ (float)width + 70, 60, 30,30 };
+	Rectangle buttonStone{ (float)width + 120, 60, 30,30 };
+	Rectangle buttonLava{ (float)width + 170, 60, 30, 30 };
+	Rectangle buttonScale{ (float)width + 20, 152, 15, 15 };
+	Rectangle buttonReset{ (float)width + 20, 180, 15, 15 };
 
-	Color sand{ 254, 237, 192, 255 };
-	Color water{ 90, 127, 255, 255 };
-	Color stone{ 200, 200, 200, 255 };
-	Color lava{ 231, 111, 81, 255 };
+	if (isPressed(mousePoint, mousePressed, buttonScale))
+	{
+		SCALE *= 2;
+		if (SCALE > 10)
+			SCALE = 1;
+	}
+	if (isPressed(mousePoint, mousePressed, buttonReset))
+	{
+		m_grid.ResetGrid();
+	}
 
 	if (isPressed(mousePoint, mousePressed, buttonSand))
 		m_choice = 1;
@@ -96,10 +127,14 @@ void Handle::UIButton(int width)
 	else if (isPressed(mousePoint, mousePressed, buttonLava))
 		m_choice = 4;
 
+
 	DrawRectangleRec(buttonSand, sand);
 	DrawRectangleRec(buttonWater, water);
 	DrawRectangleRec(buttonStone, stone);
 	DrawRectangleRec(buttonLava, lava);
+	DrawRectangleRec(buttonScale, RAYWHITE);
+	DrawRectangleRec(buttonReset, RAYWHITE);
+
 }
 
 bool Handle::isPressed(Vector2 mousePos, bool mousePress, Rectangle button)

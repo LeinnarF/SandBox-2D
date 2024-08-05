@@ -1,7 +1,7 @@
 #include "element.h"
 
 Color sand{ 254, 237, 192, 255 };
-Color water{ 90, 127, 255, 255 };
+Color water{ 117, 149, 224, 255 };
 Color stone{ 200, 200, 200, 255 };
 Color lava{ 231, 111, 81, 255 };
 
@@ -63,7 +63,7 @@ void Element::Sand(Grid& grid, int y, int x)
 
 void Element::Water(Grid& grid, int y, int x)
 {
-	grid.moveLiquid(y, x, 5);
+	grid.moveLiquid(y, x, 4);
 }
 
 void Element::Stone(Grid& grid, int y, int x)

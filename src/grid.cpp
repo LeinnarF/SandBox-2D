@@ -146,3 +146,14 @@ void Grid::moveLiquid(int y, int x, int dispersionRate)
 		}
 	}
 }
+
+void Grid::ResetGrid()
+{
+	for (int y = 0; y < m_y; y++)
+	{
+		for (int x = 0; x < m_x; x++)
+		{
+			setValue(x, y, 0);
+		}
+	}
+}
