@@ -31,13 +31,11 @@ void Handle::InputMouse(int type, int offset)
 {
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
-		int monitor = GetMonitorCount();
 		Vector2 mousePosition = GetMousePosition();
 		m_grid.addBlock((int)mousePosition.x, (int)mousePosition.y, type, SCALE, m_offset);
 	}
 	if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
 	{
-		int monitor = GetMonitorCount();
 		Vector2 mousePosition = GetMousePosition();
 		m_grid.erase((int)mousePosition.x, (int)mousePosition.y, m_offset);
 	}
@@ -56,8 +54,6 @@ void Handle::inputChoice()
 
 	else if (IsKeyPressed(KEY_FOUR))
 		m_choice = 4;
-	else if (IsKeyPressed(KEY_FIVE))
-		m_choice = 5;
 
 	InputMouse(m_choice, m_offset);
 

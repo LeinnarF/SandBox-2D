@@ -17,8 +17,6 @@ int main()
 
 	Handle handle(gridWidth, gridHeight, CELL_SIZE, OFFSET);
 
-	handle.DebuggSetValue(0, 0, 3);
-
 	while (!WindowShouldClose())
 	{
 		//Event

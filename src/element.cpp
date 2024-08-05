@@ -16,9 +16,6 @@ void Element::Draw(Grid& grid, int y, int x, int offsety, int offsetx)
 
 	else if (grid.checkCell(y, x, 4))
 		DrawRectangle(x * grid.getCellsize() + offsetx, y * grid.getCellsize() + offsety, grid.getCellsize(), grid.getCellsize(), ORANGE);
-
-	else if (grid.checkCell(y, x, 5))
-		DrawRectangle(x * grid.getCellsize() + offsetx, y * grid.getCellsize() + offsety, grid.getCellsize(), grid.getCellsize(), DARKGRAY);
 }
 
 void Element::Update(Grid& grid, int y, int x)
@@ -34,9 +31,6 @@ void Element::Update(Grid& grid, int y, int x)
 
 	else if (grid.checkCell(y, x, 4))
 		Lava(grid, y, x);
-
-	else if (grid.checkCell(y, x, 5))
-		Smoke(grid, y, x);
 }
 
 void Element::Sand(Grid& grid, int y, int x)
@@ -78,19 +72,4 @@ void Element::Stone(Grid& grid, int y, int x)
 void Element::Lava(Grid& grid, int y, int x)
 {
 	grid.moveLiquid(y, x, 1);
-}
-
-void Element::Smoke(Grid& grid, int y, int x)
-{
-	//Up
-	if (grid.isEmpty(y - 1, x))
-		grid.moveCell(y, x, y - 1, x);
-
-	// left
-	else if (grid.isEmpty(y - 1, x - 1))
-		grid.moveCell(y, x, y - 1, x - 1);
-
-	//right
-	else if (grid.isEmpty(y - 1, x + 1))
-		grid.moveCell(y, x, y - 1, x + 1);
 }
