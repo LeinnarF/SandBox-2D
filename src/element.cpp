@@ -1,14 +1,13 @@
 #include "element.h"
 
-Color sand{ 249, 226, 175, 255 };
-Color water{ 100, 130, 250, 255 };
-Color stone;
+Color sand{ 254, 237, 192, 255 };
+Color water{ 90, 127, 255, 255 };
+Color stone{ 200, 200, 200, 255 };
 Color lava{ 231, 111, 81, 255 };
 
 
 void Element::Draw(Grid& grid, int y, int x)
 {
-
 	if (grid.checkCell(y, x, 1))
 		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), sand);
 
@@ -16,7 +15,7 @@ void Element::Draw(Grid& grid, int y, int x)
 		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), water);
 
 	else if (grid.checkCell(y, x, 3))
-		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), GRAY);
+		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), stone);
 
 	else if (grid.checkCell(y, x, 4))
 		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), lava);
