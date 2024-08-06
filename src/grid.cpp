@@ -6,6 +6,7 @@ Grid::Grid(int width, int height, int cellsize) :
 	m_y(height / cellsize),
 	m_cellsize(cellsize),
 	m_cells(m_y, std::vector<int>(m_x, 0)),
+	m_colorManager(m_x, m_y),
 	m_element()
 {}
 
@@ -56,12 +57,16 @@ void Grid::moveCell(int y1, int x1, int y2, int x2)
 {
 	m_cells[y2][x2] = m_cells[y1][x1];
 	m_cells[y1][x1] = 0;
+	m_colorManager.setColor(y2, x2, m_colorManager.getColor(y1, x1));
+	m_colorManager.setColor(y1, x1, BLANK);
 }
 
 void Grid::moveCell(int y1, int x1, int y2, int x2, int swap)
 {
 	m_cells[y2][x2] = m_cells[y1][x1];
 	m_cells[y1][x1] = swap;
+	m_colorManager.setColor(y2, x2, m_colorManager.getColor(y1, x1));
+	m_colorManager.setColor(y1, x1, BLANK);
 }
 
 void Grid::addBlock(int mouseX, int mouseY, int value, int scale)
@@ -74,7 +79,10 @@ void Grid::addBlock(int mouseX, int mouseY, int value, int scale)
 		for (int x = startx; x < startx + scale; x++)
 		{
 			if (isWithinBounds(y, x) && isEmpty(y, x))
+			{
 				setValue(x, y, value);
+				m_colorManager.elementColor(y, x, value);
+			}
 		}
 	}
 }
@@ -157,3 +165,9 @@ void Grid::ResetGrid()
 		}
 	}
 }
+
+Color Grid::getColor(int y, int x) const
+{
+	return m_colorManager.getColor(y, x);
+}
+

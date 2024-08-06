@@ -128,12 +128,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\colormanager.cpp" />
     <ClCompile Include="src\element.cpp" />
     <ClCompile Include="src\grid.cpp" />
     <ClCompile Include="src\handler.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\colormanager.h" />
     <ClInclude Include="src\element.h" />
     <ClInclude Include="src\grid.h" />
     <ClInclude Include="src\handler.h" />

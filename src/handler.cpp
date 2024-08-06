@@ -113,10 +113,9 @@ void Handle::UIButton(int width)
 		if (m_scale > 10)
 			m_scale = 1;
 	}
+
 	if (isPressed(mousePoint, mousePressed, buttonReset))
-	{
 		m_grid.ResetGrid();
-	}
 
 	if (isPressed(mousePoint, mousePressed, buttonSand))
 		m_choice = 1;

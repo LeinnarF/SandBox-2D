@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <raylib.h>
+#include "colormanager.h"
 
 class Element;
 
@@ -24,6 +25,8 @@ public:
 	int getHeight() { return m_y; }
 	void moveLiquid(int y, int x, int dispersionRate);
 	void ResetGrid();
+	Color getColor(int y, int x) const;
+	ColorManager& getColorManager();
 
 private:
 	int m_x;
@@ -31,6 +34,7 @@ private:
 	int m_cellsize;
 	std::vector<std::vector<int>> m_cells;
 	Element* m_element;
+	ColorManager m_colorManager;
 };
 
 

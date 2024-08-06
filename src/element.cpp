@@ -7,17 +7,23 @@ Color lava{ 231, 111, 81, 255 };
 
 void Element::Draw(Grid& grid, int y, int x)
 {
+
 	if (grid.checkCell(y, x, 1))
-		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), sand);
+	{
+		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), grid.getColor(y, x));
+	}
 
 	else if (grid.checkCell(y, x, 2))
 		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), water);
 
 	else if (grid.checkCell(y, x, 3))
-		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), stone);
+		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), grid.getColor(y, x));
+
 
 	else if (grid.checkCell(y, x, 4))
 		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), lava);
+
+
 }
 
 void Element::Update(Grid& grid, int y, int x)
@@ -37,32 +43,29 @@ void Element::Update(Grid& grid, int y, int x)
 
 void Element::Sand(Grid& grid, int y, int x)
 {
+	int direction = GetRandomValue(0, 1) * 2 - 1;
+
 	//down
 	if (grid.isEmpty(y + 1, x))
 		grid.moveCell(y, x, y + 1, x);
 
-	// left
-	else if (grid.isEmpty(y + 1, x - 1))
-		grid.moveCell(y, x, y + 1, x - 1);
-
-	//right
-	else if (grid.isEmpty(y + 1, x + 1))
-		grid.moveCell(y, x, y + 1, x + 1);
+	// left or right
+	else if (grid.isEmpty(y + 1, x - direction))
+		grid.moveCell(y, x, y + 1, x - direction);
 
 	// interaction with water
 	else if (grid.isWithinBounds(y + 1, x) && grid.checkCell(y + 1, x, 2))
 		grid.moveCell(y, x, y + 1, x, 2);
 
-	else if (grid.isWithinBounds(y + 1, x - 1) && grid.checkCell(y + 1, x - 1, 2))
-		grid.moveCell(y, x, y + 1, x - 1, 2);
+	else if (grid.isWithinBounds(y + 1, x + direction) && grid.checkCell(y + 1, x + direction, 2))
+		grid.moveCell(y, x, y + 1, x + direction, 2);
 
-	else if (grid.isWithinBounds(y + 1, x + 1) && grid.checkCell(y + 1, x + 1, 2))
-		grid.moveCell(y, x, y + 1, x + 1, 2);
 }
 
 void Element::Water(Grid& grid, int y, int x)
 {
-	grid.moveLiquid(y, x, 4);
+	int dispersionRate = GetRandomValue(3, 5);
+	grid.moveLiquid(y, x, dispersionRate);
 }
 
 void Element::Stone(Grid& grid, int y, int x)
