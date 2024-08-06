@@ -5,7 +5,6 @@ Color water{ 117, 149, 224, 255 };
 Color stone{ 200, 200, 200, 255 };
 Color lava{ 231, 111, 81, 255 };
 
-
 void Element::Draw(Grid& grid, int y, int x)
 {
 	if (grid.checkCell(y, x, 1))

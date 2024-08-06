@@ -1,7 +1,6 @@
 #include "handler.h"
 #include <string>
 
-int SCALE = 2;
 
 static Color sand{ 254, 237, 192, 255 };
 static Color water{ 117, 149, 224, 255 };
@@ -9,7 +8,7 @@ static Color stone{ 200, 200, 200, 255 };
 static Color lava{ 231, 111, 81, 255 };
 
 Handle::Handle(int width, int height, int cellsize) :
-	m_grid(width, height, cellsize), m_choice(1)
+	m_grid(width, height, cellsize), m_choice(1), m_scale(2)
 {};
 
 
@@ -29,7 +28,7 @@ void Handle::InputMouse(int type)
 	if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 	{
 		Vector2 mousePosition = GetMousePosition();
-		m_grid.addBlock((int)mousePosition.x, (int)mousePosition.y, type, SCALE);
+		m_grid.addBlock((int)mousePosition.x, (int)mousePosition.y, type, m_scale);
 	}
 	if (IsMouseButtonDown(MOUSE_RIGHT_BUTTON))
 	{
@@ -88,8 +87,9 @@ void Handle::UIPanel(int width, int height, Color color)
 	DrawText(element, width + 110, 110, 20, elementColor);
 	DrawText("Scale: ", width + 50, 150, 20, WHITE);
 
-	std::string scaleString = std::to_string(SCALE);
+	std::string scaleString = std::to_string(m_scale);
 	const char* scaleChar = scaleString.c_str();
+
 	DrawText(scaleChar, width + 120, 150, 20, WHITE);
 
 	DrawText("Reset", width + 50, 180, 20, WHITE);
@@ -109,9 +109,9 @@ void Handle::UIButton(int width)
 
 	if (isPressed(mousePoint, mousePressed, buttonScale))
 	{
-		SCALE *= 2;
-		if (SCALE > 10)
-			SCALE = 1;
+		m_scale *= 2;
+		if (m_scale > 10)
+			m_scale = 1;
 	}
 	if (isPressed(mousePoint, mousePressed, buttonReset))
 	{
@@ -145,5 +145,6 @@ bool Handle::isPressed(Vector2 mousePos, bool mousePress, Rectangle button)
 	}
 	return false;
 }
+
 
 
