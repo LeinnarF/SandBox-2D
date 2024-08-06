@@ -1,29 +1,19 @@
 #include "element.h"
 
-Color sand{ 254, 237, 192, 255 };
-Color water{ 117, 149, 224, 255 };
-Color stone{ 200, 200, 200, 255 };
-Color lava{ 231, 111, 81, 255 };
-
 void Element::Draw(Grid& grid, int y, int x)
 {
-
 	if (grid.checkCell(y, x, 1))
-	{
-		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), grid.getColor(y, x));
-	}
+		drawCell(grid, y, x);
 
 	else if (grid.checkCell(y, x, 2))
-		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), water);
+		drawCell(grid, y, x);
+
 
 	else if (grid.checkCell(y, x, 3))
-		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), grid.getColor(y, x));
-
+		drawCell(grid, y, x);
 
 	else if (grid.checkCell(y, x, 4))
-		DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), lava);
-
-
+		drawCell(grid, y, x);
 }
 
 void Element::Update(Grid& grid, int y, int x)
@@ -41,6 +31,11 @@ void Element::Update(Grid& grid, int y, int x)
 		Lava(grid, y, x);
 }
 
+void Element::drawCell(Grid& grid, int y, int x)
+{
+	DrawRectangle(x * grid.getCellsize(), y * grid.getCellsize(), grid.getCellsize(), grid.getCellsize(), grid.getColor(y, x));
+}
+
 void Element::Sand(Grid& grid, int y, int x)
 {
 	int direction = GetRandomValue(0, 1) * 2 - 1;
@@ -55,11 +50,10 @@ void Element::Sand(Grid& grid, int y, int x)
 
 	// interaction with water
 	else if (grid.isWithinBounds(y + 1, x) && grid.checkCell(y + 1, x, 2))
-		grid.moveCell(y, x, y + 1, x, 2);
+		grid.moveCell(y, x, y + 1, x, 2, grid.getColor(y + 1, x));
 
 	else if (grid.isWithinBounds(y + 1, x + direction) && grid.checkCell(y + 1, x + direction, 2))
-		grid.moveCell(y, x, y + 1, x + direction, 2);
-
+		grid.moveCell(y, x, y + 1, x + direction, 2, grid.getColor(y + 1, x + direction));
 }
 
 void Element::Water(Grid& grid, int y, int x)

@@ -61,12 +61,12 @@ void Grid::moveCell(int y1, int x1, int y2, int x2)
 	m_colorManager.setColor(y1, x1, BLANK);
 }
 
-void Grid::moveCell(int y1, int x1, int y2, int x2, int swap)
+void Grid::moveCell(int y1, int x1, int y2, int x2, int swap, Color swapColor)
 {
 	m_cells[y2][x2] = m_cells[y1][x1];
 	m_cells[y1][x1] = swap;
 	m_colorManager.setColor(y2, x2, m_colorManager.getColor(y1, x1));
-	m_colorManager.setColor(y1, x1, BLANK);
+	m_colorManager.setColor(y1, x1, swapColor);
 }
 
 void Grid::addBlock(int mouseX, int mouseY, int value, int scale)

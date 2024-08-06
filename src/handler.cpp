@@ -1,7 +1,6 @@
 #include "handler.h"
 #include <string>
 
-
 static Color sand{ 254, 237, 192, 255 };
 static Color water{ 117, 149, 224, 255 };
 static Color stone{ 200, 200, 200, 255 };
@@ -10,8 +9,6 @@ static Color lava{ 231, 111, 81, 255 };
 Handle::Handle(int width, int height, int cellsize) :
 	m_grid(width, height, cellsize), m_choice(1), m_scale(2)
 {};
-
-
 
 void Handle::Draw()
 {

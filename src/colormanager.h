@@ -11,7 +11,7 @@ public:
 	Color getColor(int y, int x) const;
 	void resetColors();
 
-	void elementColor(int y, int x, int target);
+	void elementColor(int y, int x, int type);
 
 private:
 	int m_width;

@@ -17,7 +17,7 @@ public:
 	bool isEmpty(int y, int x);
 	bool checkCell(int y, int x, int target);
 	void moveCell(int y1, int x1, int y2, int x2);
-	void moveCell(int y1, int x1, int y2, int x2, int swap);
+	void moveCell(int y1, int x1, int y2, int x2, int swap, Color swapColor);
 	void addBlock(int mouseX, int mouseY, int value, int scale);
 	void erase(int mouseX, int mouseY);
 	int getCellsize() { return m_cellsize; }
