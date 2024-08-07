@@ -107,7 +107,7 @@ void Handle::UIButton(int width)
 	if (isPressed(mousePoint, mousePressed, buttonScale))
 	{
 		m_scale *= 2;
-		if (m_scale > 10)
+		if (m_scale > 17)
 			m_scale = 1;
 	}
 

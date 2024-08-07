@@ -13,5 +13,4 @@ public:
 	void Water(Grid& grid, int y, int x);
 	void Stone(Grid& grid, int y, int x);
 	void Lava(Grid& grid, int y, int x);
-	void Smoke(Grid& grid, int y, int x);
 };

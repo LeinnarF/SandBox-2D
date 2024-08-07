@@ -20,13 +20,6 @@ int main()
 
 	Handle handle(gridWidth, gridHeight, CELL_SIZE);
 
-
-	Rectangle button{ gridWidth / 2.0f - 100, HEIGHT / 2.0f - 25,200,50 };
-	Color buttonColor = RED;
-	bool isPressed = false;
-
-
-
 	while (!WindowShouldClose())
 	{
 		//Event

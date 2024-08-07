@@ -4,14 +4,10 @@ void Element::Draw(Grid& grid, int y, int x)
 {
 	if (grid.checkCell(y, x, 1))
 		drawCell(grid, y, x);
-
 	else if (grid.checkCell(y, x, 2))
 		drawCell(grid, y, x);
-
-
 	else if (grid.checkCell(y, x, 3))
 		drawCell(grid, y, x);
-
 	else if (grid.checkCell(y, x, 4))
 		drawCell(grid, y, x);
 }
@@ -20,13 +16,10 @@ void Element::Update(Grid& grid, int y, int x)
 {
 	if (grid.checkCell(y, x, 1))
 		Sand(grid, y, x);
-
 	else if (grid.checkCell(y, x, 2))
 		Water(grid, y, x);
-
 	else if (grid.checkCell(y, x, 3))
 		Stone(grid, y, x);
-
 	else if (grid.checkCell(y, x, 4))
 		Lava(grid, y, x);
 }
@@ -58,7 +51,7 @@ void Element::Sand(Grid& grid, int y, int x)
 
 void Element::Water(Grid& grid, int y, int x)
 {
-	int dispersionRate = GetRandomValue(3, 5);
+	int dispersionRate = GetRandomValue(4, 10);
 	grid.moveLiquid(y, x, dispersionRate);
 }
 
