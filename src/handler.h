@@ -19,4 +19,5 @@ private:
 	Grid m_grid;
 	int m_type;
 	int m_scale;
+	int m_shape;
 };

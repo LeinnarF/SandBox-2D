@@ -10,8 +10,9 @@ public:
 	void setColor(int y, int x, Color color);
 	Color getColor(int y, int x) const;
 	void resetColors();
-
 	void elementColor(int y, int x, int type);
+
+	static Color getElementColor(int type);
 
 private:
 	int m_width;

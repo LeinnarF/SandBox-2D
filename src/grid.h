@@ -19,7 +19,8 @@ public:
 	bool checkCell(int y, int x, int target);
 	void moveCell(int y1, int x1, int y2, int x2);
 	void moveCell(int y1, int x1, int y2, int x2, int swap, Color swapColor);
-	void addBlock(int mouseX, int mouseY, int value, int scale);
+	void removeCell(int y, int x);
+	void addBlock(int mouseX, int mouseY, int value, int scale, int shape);
 	void erase(int mouseX, int mouseY);
 	int getCellsize() { return m_cellsize; }
 	int getWidth() { return m_x; }
@@ -27,6 +28,7 @@ public:
 	void moveLiquid(int y, int x, int dispersionRate);
 	void ResetGrid();
 	Color getColor(int y, int x) const;
+	ColorManager& getColorManager() { return m_colorManager; }
 
 private:
 	int m_x;

@@ -23,7 +23,7 @@ void Grid::Draw()
 
 void Grid::Update(int type)
 {
-	for (int y = m_y - 2; y >= 0; y--)
+	for (int y = m_y - 1; y >= 0; y--)
 	{
 		for (int x = 0; x < m_x; x++)
 		{
@@ -62,6 +62,7 @@ bool Grid::isEmpty(int y, int x)
 
 bool Grid::checkCell(int y, int x, int target)
 {
+	if (!isWithinBounds(y, x)) return false;
 	return m_cells[y][x] == target;
 }
 
@@ -81,23 +82,56 @@ void Grid::moveCell(int y1, int x1, int y2, int x2, int swap, Color swapColor)
 	m_colorManager.setColor(y1, x1, swapColor);
 }
 
-void Grid::addBlock(int mouseX, int mouseY, int value, int scale)
+void Grid::removeCell(int y, int x)
+{
+	if (isWithinBounds(y, x) && !checkCell(y, x, 0))
+	{
+		m_cells[y][x] = 0;
+		m_colorManager.setColor(y, x, RED);
+	}
+}
+
+void Grid::addBlock(int mouseX, int mouseY, int value, int scale, int state)
 {
 	int startx = mouseX / m_cellsize;
 	int starty = mouseY / m_cellsize;
+	int radius = scale / 2;
+	int radiusSquared = radius * radius;
 
-	for (int y = starty; y < starty + scale; y++)
+	if (state == 1)
 	{
-		for (int x = startx; x < startx + scale; x++)
+		for (int y = starty; y < starty + scale; y++)
 		{
-			if (isWithinBounds(y, x) && isEmpty(y, x))
+			for (int x = startx; x < startx + scale; x++)
 			{
-				setValue(x, y, value);
-				m_colorManager.elementColor(y, x, value);
+				if (isWithinBounds(y, x) && isEmpty(y, x))
+				{
+					setValue(x, y, value);
+					m_colorManager.elementColor(y, x, value);
+				}
+			}
+		}
+	}
+	else
+	{
+		for (int y = starty - radius; y <= starty + radius; y++)
+		{
+			for (int x = startx - radius; x <= startx + radius; x++)
+			{
+				int dx = x - startx;
+				int dy = y - starty;
+				int distanceSquared = dx * dx + dy * dy;
+
+				if (distanceSquared <= radiusSquared && isWithinBounds(y, x) && isEmpty(y, x))
+				{
+					setValue(x, y, value);
+					m_colorManager.elementColor(y, x, value);
+				}
 			}
 		}
 	}
 }
+
 
 void Grid::erase(int mouseX, int mouseY)
 {
@@ -106,7 +140,6 @@ void Grid::erase(int mouseX, int mouseY)
 	if (isWithinBounds(y, x) && !isEmpty(y, x))
 		setValue(x, y, 0);
 }
-
 
 void Grid::moveLiquid(int y, int x, int dispersionRate)
 {
