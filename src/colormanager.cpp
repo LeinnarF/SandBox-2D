@@ -38,7 +38,7 @@ void ColorManager::elementColor(int y, int x, int type)
 {
 	if (type == 1)
 	{
-		Color sand = {
+		Color sand{
 			(unsigned char)GetRandomValue(240, 255),
 			(unsigned char)GetRandomValue(200, 237),
 			(unsigned char)GetRandomValue(180, 195),
@@ -53,7 +53,7 @@ void ColorManager::elementColor(int y, int x, int type)
 	}
 	else if (type == 3)
 	{
-		Color stone = {
+		Color stone{
 			170,
 			170,
 			170,
@@ -73,5 +73,14 @@ void ColorManager::elementColor(int y, int x, int type)
 		temp_lava.g += GetRandomValue(-10, 10);
 
 		setColor(y, x, temp_lava);
+	}
+	else if (type == 5)
+	{
+		Color smoke{
+			128,
+			128,
+			128,
+			(unsigned char)GetRandomValue(0, 100) };
+		setColor(y, x, smoke);
 	}
 }

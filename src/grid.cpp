@@ -21,13 +21,25 @@ void Grid::Draw()
 	}
 }
 
-void Grid::Update()
+void Grid::Update(int type)
 {
 	for (int y = m_y - 2; y >= 0; y--)
 	{
 		for (int x = 0; x < m_x; x++)
 		{
 			m_element->Update(*this, y, x);
+		}
+	}
+	UpdateUp();
+}
+
+void Grid::UpdateUp()
+{
+	for (int y = 0; y < m_y; y++)
+	{
+		for (int x = 0; x < m_x; x++)
+		{
+			m_element->UpdateUp(*this, y, x);
 		}
 	}
 }

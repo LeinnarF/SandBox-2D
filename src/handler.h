@@ -17,6 +17,6 @@ public:
 
 private:
 	Grid m_grid;
-	int m_choice;
+	int m_type;
 	int m_scale;
 };

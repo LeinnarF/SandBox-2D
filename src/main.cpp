@@ -32,7 +32,7 @@ int main()
 		BeginDrawing();
 		handle.UIPanel(gridWidth, gridHeight, rightPanel);
 		handle.UIButton(gridWidth);
-		DrawText("Created by LeinnarF", gridWidth + 270, gridHeight - 30, 12, LIGHTGRAY);
+		DrawText("Created by LeinnarF", gridWidth + 250, gridHeight - 30, 13, LIGHTGRAY);
 		ClearBackground(background);
 		handle.Draw();
 

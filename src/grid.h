@@ -11,7 +11,8 @@ public:
 	Grid(int width, int height, int cellsize);
 
 	void Draw();
-	void Update();
+	void Update(int type);
+	void UpdateUp();
 	void setValue(int x, int y, int value);
 	bool isWithinBounds(int y, int x);
 	bool isEmpty(int y, int x);
@@ -26,7 +27,6 @@ public:
 	void moveLiquid(int y, int x, int dispersionRate);
 	void ResetGrid();
 	Color getColor(int y, int x) const;
-	ColorManager& getColorManager();
 
 private:
 	int m_x;

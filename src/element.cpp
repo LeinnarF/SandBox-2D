@@ -10,6 +10,8 @@ void Element::Draw(Grid& grid, int y, int x)
 		drawCell(grid, y, x);
 	else if (grid.checkCell(y, x, 4))
 		drawCell(grid, y, x);
+	else if (grid.checkCell(y, x, 5))
+		drawCell(grid, y, x);
 }
 
 void Element::Update(Grid& grid, int y, int x)
@@ -22,6 +24,12 @@ void Element::Update(Grid& grid, int y, int x)
 		Stone(grid, y, x);
 	else if (grid.checkCell(y, x, 4))
 		Lava(grid, y, x);
+}
+
+void Element::UpdateUp(Grid& grid, int y, int x)
+{
+	if (grid.checkCell(y, x, 5))
+		Smoke(grid, y, x);
 }
 
 void Element::drawCell(Grid& grid, int y, int x)
@@ -64,4 +72,21 @@ void Element::Stone(Grid& grid, int y, int x)
 void Element::Lava(Grid& grid, int y, int x)
 {
 	grid.moveLiquid(y, x, 1);
+}
+
+void Element::Smoke(Grid& grid, int y, int x)
+{
+	int direction = GetRandomValue(0, 1) * 2 - 1;
+
+	// despawn smoke
+	if (GetRandomValue(0, 100) == 50)
+		grid.setValue(x, y, 0);
+
+	// up
+	if (grid.isEmpty(y - 1, x))
+		grid.moveCell(y, x, y - 1, x);
+
+	// left or right
+	else if (grid.isEmpty(y - 1, x - direction))
+		grid.moveCell(y, x, y - 1, x - direction);
 }
