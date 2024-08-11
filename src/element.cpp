@@ -1,59 +1,47 @@
 #include "element.h"
 
 enum Type {
-	empty, sand, water, stone, lava, smoke, cement, acid, oil, fire, gunpowder
+	empty, sand, water, stone, lava, smoke, cement, acid, oil, fire, gunpowder, endType
 };
 
 void Element::Draw(Grid& grid, int y, int x)
 {
-	if (grid.checkCell(y, x, sand))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, water))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, stone))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, lava))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, smoke))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, cement))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, acid))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, oil))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, fire))
-		drawCell(grid, y, x);
-	else if (grid.checkCell(y, x, gunpowder))
-		drawCell(grid, y, x);
+	for (int type = sand; type < endType; type++)
+	{
+		if (grid.checkCell(y, x, static_cast<Type>(type)))
+		{
+			drawCell(grid, y, x);
+			break;
+		}
+	}
 }
 
 void Element::Update(Grid& grid, int y, int x)
 {
-	if (grid.checkCell(y, x, sand))
-		Sand(grid, y, x);
-	else if (grid.checkCell(y, x, water))
-		Water(grid, y, x);
-	else if (grid.checkCell(y, x, stone))
-		Stone(grid, y, x);
-	else if (grid.checkCell(y, x, lava))
-		Lava(grid, y, x);
-	else if (grid.checkCell(y, x, cement))
-		Cement(grid, y, x);
-	else if (grid.checkCell(y, x, acid))
-		Acid(grid, y, x);
-	else if (grid.checkCell(y, x, oil))
-		Oil(grid, y, x);
-	else if (grid.checkCell(y, x, gunpowder))
-		GunPowder(grid, y, x);
+	Type cellType = static_cast<Type>(grid.getValue(x, y));
+	switch (cellType)
+	{
+	case sand: Sand(grid, y, x); break;
+	case water: Water(grid, y, x); break;
+	case stone: Stone(grid, y, x); break;
+	case lava: Lava(grid, y, x); break;
+	case cement:Cement(grid, y, x); break;
+	case acid: Acid(grid, y, x); break;
+	case oil: Oil(grid, y, x); break;
+	case gunpowder: GunPowder(grid, y, x); break;
+	default: break;
+	}
 }
 
 void Element::UpdateUp(Grid& grid, int y, int x)
 {
-	if (grid.checkCell(y, x, smoke))
-		Smoke(grid, y, x);
-	else if (grid.checkCell(y, x, fire))
-		Fire(grid, y, x);
+	Type cellType = static_cast<Type>(grid.getValue(x, y));
+	switch (cellType)
+	{
+	case smoke: Smoke(grid, y, x); break;
+	case fire: Fire(grid, y, x); break;
+	default: break;
+	}
 }
 
 void Element::drawCell(Grid& grid, int y, int x)
@@ -216,10 +204,6 @@ void Element::Stone(Grid& grid, int y, int x)
 			grid.getColorManager().elementColor(y, x, smoke);
 		}
 	}
-
-	// interaction with Cement : not sure
-	/*if (grid.isWithinBounds(y + 1, x) && grid.checkCell(y + 1, x, 6))
-		grid.moveCell(y, x, y + 1, x, 6, grid.getColor(y + 1, x));*/
 }
 
 void Element::Lava(Grid& grid, int y, int x)
@@ -274,7 +258,7 @@ void Element::Smoke(Grid& grid, int y, int x)
 void Element::Cement(Grid& grid, int y, int x)
 {
 	grid.moveLiquid(y, x, 1);
-	if (GetRandomValue(0, 500) == 0)
+	if (GetRandomValue(0, 300) == 0)
 	{
 		// turns to stone
 		grid.setValue(x, y, stone);
@@ -296,9 +280,10 @@ void Element::Acid(Grid& grid, int y, int x)
 		if (GetRandomValue(0, 1) == 1)
 		{
 			grid.removeCell(y, x);
-			grid.setValue(x, y - 1, lava);
+			grid.setValue(x, y - 1, fire);
 			grid.setValue(x, y, smoke);
 			grid.getColorManager().elementColor(y, x, smoke);
+			grid.getColorManager().elementColor(y - 1, x, smoke);
 		}
 	}
 }

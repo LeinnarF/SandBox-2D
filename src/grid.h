@@ -25,6 +25,7 @@ public:
 	int getCellsize() { return m_cellsize; }
 	int getWidth() { return m_x; }
 	int getHeight() { return m_y; }
+	int getValue(int x, int y) { return m_cells[y][x]; }
 	void moveLiquid(int y, int x, int dispersionRate);
 	void ResetGrid();
 	Color getColor(int y, int x) const;

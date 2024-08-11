@@ -10,6 +10,7 @@ Color acid{ 105, 235, 101, 255 };
 Color oil{ 33, 32, 46 , 255 };
 Color fire{ 231, 111, 81, 255 };
 Color gunpowder{ 40,40,40,255 };
+Color wood = BROWN;
 
 ColorManager::ColorManager(int width, int height) :
 	m_width(width),
@@ -108,7 +109,8 @@ void ColorManager::elementColor(int y, int x, int type)
 	}
 	else if (type == 9)
 	{
-		setColor(y, x, fire);
+		Color randColor = (GetRandomValue(0, 20) == 1) ? YELLOW : fire;
+		setColor(y, x, randColor);
 	}
 	else if (type == 10)
 	{
@@ -135,6 +137,7 @@ Color ColorManager::getElementColor(int type)
 	case 8: return oil;
 	case 9: return fire;
 	case 10: return gunpowder;
+	case 11: return wood;
 	default: return BLANK;
 	}
 }
