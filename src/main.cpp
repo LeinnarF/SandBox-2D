@@ -6,7 +6,6 @@ int main()
 	const int CELL_SIZE = 3;
 	const int WIDTH = 1300;
 	const int HEIGHT = 800;
-	const int OFFSET = 0;
 	const char* TITLE = "Sandbox.";
 
 	Color background{ 77, 76, 99, 255 };

@@ -22,14 +22,14 @@ public:
 	void removeCell(int y, int x);
 	void addBlock(int mouseX, int mouseY, int value, int scale, int shape);
 	void erase(int mouseX, int mouseY);
-	int getCellsize() { return m_cellsize; }
-	int getWidth() { return m_x; }
-	int getHeight() { return m_y; }
-	int getValue(int x, int y) { return m_cells[y][x]; }
 	void moveLiquid(int y, int x, int dispersionRate);
 	void ResetGrid();
 	Color getColor(int y, int x) const;
 	ColorManager& getColorManager() { return m_colorManager; }
+	int getCellsize() const { return m_cellsize; }
+	int getWidth() const { return m_x; }
+	int getHeight() const { return m_y; }
+	int getValue(int x, int y) const { return m_cells[y][x]; }
 
 private:
 	int m_x;

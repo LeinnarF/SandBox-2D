@@ -1,16 +1,18 @@
 #include "colormanager.h"
+#include "elementEnum.h"
 
-Color sand{ 254, 237, 192, 255 };
-Color water{ 117, 149, 224, 255 };
-Color stone{ 200, 200, 200, 255 };
-Color lava{ 231, 111, 81, 255 };
-Color smoke{ 200, 200, 200, 100 };
-Color cement{ 230,230,230,255 };
-Color acid{ 105, 235, 101, 255 };
-Color oil{ 33, 32, 46 , 255 };
-Color fire{ 231, 111, 81, 255 };
-Color gunpowder{ 40,40,40,255 };
-Color wood = BROWN;
+//TODO: add here
+Color sandColor{ 254, 237, 192, 255 };
+Color waterColor{ 117, 149, 224, 255 };
+Color stoneColor{ 200, 200, 200, 255 };
+Color lavaColor{ 231, 111, 81, 255 };
+Color smokeColor{ 200, 200, 200, 100 };
+Color cementColor{ 230,230,230,255 };
+Color acidColor{ 105, 235, 101, 255 };
+Color oilColor{ 33, 32, 46 , 255 };
+Color fireColor{ 231, 111, 81, 255 };
+Color gunpowderColor{ 40,40,40,255 };
+Color woodColor = BROWN; // TODO: change this!
 
 ColorManager::ColorManager(int width, int height) :
 	m_width(width),
@@ -48,7 +50,10 @@ void ColorManager::resetColors()
 
 void ColorManager::elementColor(int y, int x, int type)
 {
-	if (type == 1)
+	//TODO: add here
+	switch (type)
+	{
+	case sand:
 	{
 		Color sand{
 			(unsigned char)GetRandomValue(240, 255),
@@ -57,87 +62,102 @@ void ColorManager::elementColor(int y, int x, int type)
 			255
 		};
 		setColor(y, x, sand);
+		break;
 	}
-	else if (type == 2)
+	case water:
 	{
 		Color water{ 117, 149, 224, 255 };
 		setColor(y, x, water);
+		break;
 	}
-	else if (type == 3)
+	case stone:
 	{
 		Color stone{
 			170,
 			170,
 			170,
-			(unsigned char)GetRandomValue(150,255)
+			(unsigned char)GetRandomValue(150, 255)
 		};
 		setColor(y, x, stone);
+		break;
 	}
-	else if (type == 4)
+	case lava:
 	{
-		Color lava{
-			(unsigned char)GetRandomValue(220,231),
-			(unsigned char)GetRandomValue(100,111),
-			81,
-			255 };
-		Color temp_lava = lava;
+		Color temp_lava = lavaColor;
 		temp_lava.r += GetRandomValue(-10, 10);
 		temp_lava.g += GetRandomValue(-10, 10);
 
 		setColor(y, x, temp_lava);
+		break;
 	}
-	else if (type == 5)
+	case smoke:
 	{
 		Color smoke{
 			128,
 			128,
 			128,
-			(unsigned char)GetRandomValue(0, 100) };
+			(unsigned char)GetRandomValue(0, 100)
+		};
 		setColor(y, x, smoke);
+		break;
 	}
-	else if (type == 6)
+	case cement:
 	{
-		setColor(y, x, cement);
+		setColor(y, x, cementColor);
+		break;
 	}
-	else if (type == 7)
+	case acid:
 	{
-		setColor(y, x, acid);
+		setColor(y, x, acidColor);
+		break;
 	}
-	else if (type == 8)
+	case oil:
 	{
-		setColor(y, x, oil);
+		setColor(y, x, oilColor);
+		break;
 	}
-	else if (type == 9)
+	case fire:
 	{
-		Color randColor = (GetRandomValue(0, 20) == 1) ? YELLOW : fire;
+		Color randColor = (GetRandomValue(0, 20) == 1) ? YELLOW : fireColor;
 		setColor(y, x, randColor);
+		break;
 	}
-	else if (type == 10)
+	case gunpowder:
 	{
 		Color gunpowder{
 			40,
 			40,
 			40,
-			(unsigned char)GetRandomValue(200,255) };
+			(unsigned char)GetRandomValue(200, 255)
+		};
 		setColor(y, x, gunpowder);
+		break;
+	}
+	case wood:
+	{
+		setColor(y, x, woodColor);
+	}
+	default:
+		break;
 	}
 }
 
 Color ColorManager::getElementColor(int type)
 {
+	// TODO: add here
 	switch (type)
 	{
-	case 1: return sand;
-	case 2: return water;
-	case 3: return stone;
-	case 4: return lava;
-	case 5: return smoke;
-	case 6: return cement;
-	case 7: return acid;
-	case 8: return oil;
-	case 9: return fire;
-	case 10: return gunpowder;
-	case 11: return wood;
+	case sand: return sandColor;
+	case water: return waterColor;
+	case stone: return stoneColor;
+	case lava: return lavaColor;
+	case smoke: return smokeColor;
+	case cement: return cementColor;
+	case acid: return acidColor;
+	case oil: return oilColor;
+	case fire: return fireColor;
+	case gunpowder: return gunpowderColor;
+	case wood: return woodColor;
 	default: return BLANK;
 	}
 }

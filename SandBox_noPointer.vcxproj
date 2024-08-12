@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="src\colormanager.h" />
     <ClInclude Include="src\element.h" />
+    <ClInclude Include="src\elementEnum.h" />
     <ClInclude Include="src\grid.h" />
     <ClInclude Include="src\handler.h" />
   </ItemGroup>

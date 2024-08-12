@@ -23,4 +23,5 @@ public:
 	void Oil(Grid& grid, int y, int x);
 	void Fire(Grid& grid, int y, int x);
 	void GunPowder(Grid& grid, int y, int x);
+	void Wood(Grid& grid, int y, int x);
 };

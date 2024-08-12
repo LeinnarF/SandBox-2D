@@ -1,8 +1,5 @@
 #include "element.h"
-
-enum Type {
-	empty, sand, water, stone, lava, smoke, cement, acid, oil, fire, gunpowder, endType
-};
+#include "elementEnum.h"
 
 void Element::Draw(Grid& grid, int y, int x)
 {
@@ -29,6 +26,7 @@ void Element::Update(Grid& grid, int y, int x)
 	case acid: Acid(grid, y, x); break;
 	case oil: Oil(grid, y, x); break;
 	case gunpowder: GunPowder(grid, y, x); break;
+	case wood: Wood(grid, y, x); break;
 	default: break;
 	}
 }
@@ -348,4 +346,10 @@ void Element::GunPowder(Grid& grid, int y, int x)
 	{
 		TriggerExplosion(grid, y, x);
 	}
+}
+
+void Element::Wood(Grid& grid, int y, int x)
+{
+	if (grid.isWithinBounds(y, x) && grid.isEmpty(y, x))
+		grid.setValue(x, y, wood);
 }

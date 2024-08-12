@@ -1,5 +1,6 @@
 #include "grid.h"
 #include "element.h"
+#include "elementEnum.h"
 
 Grid::Grid(int width, int height, int cellsize) :
 	m_x(width / cellsize),
@@ -107,7 +108,7 @@ void Grid::addBlock(int mouseX, int mouseY, int value, int scale, int state)
 				if (isWithinBounds(y, x) && isEmpty(y, x))
 				{
 					int noise = GetRandomValue(0, 4);
-					if (value == 3)
+					if (value == stone || value == wood)
 						noise = 0;
 					setValue(x + noise, y + noise, value);
 					m_colorManager.elementColor(y + noise, x + noise, value);

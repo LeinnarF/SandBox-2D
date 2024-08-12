@@ -44,5 +44,8 @@
     <ClInclude Include="src\colormanager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\elementEnum.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

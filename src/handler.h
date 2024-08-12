@@ -16,7 +16,6 @@ public:
 	bool isPressed(Vector2 mousePos, bool mousePress, Rectangle button);
 
 	const char* getElementName(int type);
-
 	std::vector<Rectangle> createElementButtons(int width);
 
 private:

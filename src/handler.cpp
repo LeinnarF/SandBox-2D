@@ -1,17 +1,13 @@
 #include "handler.h"
 #include "colormanager.h"
+#include "elementEnum.h"
 #include <string>
 #include <vector>
 
-// Define an enum to represent element types
-enum ElementType
-{
-	//TODO: add here
-	Sand = 1, Water, Stone, Lava, Smoke, Cement, Acid, Oil, Fire, GunPowder, Wood, ElementCount
-};
+
 
 Handle::Handle(int width, int height, int cellsize) :
-	m_grid(width, height, cellsize), m_type(Sand), m_scale(2), m_shape(1)
+	m_grid(width, height, cellsize), m_type(sand), m_scale(2), m_shape(1)
 {}
 
 void Handle::Draw()
@@ -101,7 +97,7 @@ void Handle::UIButton(int width)
 	}
 
 	// Handle element buttons
-	for (int i = 0; i < ElementCount - 1; i++)
+	for (int i = 0; i < endType - 1; i++)
 	{
 		if (isPressed(mousePoint, mousePressed, elementButtons[i]))
 		{
@@ -126,17 +122,17 @@ const char* Handle::getElementName(int type)
 	//TODO: add here
 	switch (type)
 	{
-	case Sand: return "Sand";
-	case Water: return "Water";
-	case Stone: return "Stone";
-	case Lava: return "Lava";
-	case Smoke: return "Smoke";
-	case Cement: return "Cement";
-	case Acid: return "Acid";
-	case Oil: return "Oil";
-	case Fire: return "Fire";
-	case GunPowder: return "Gun Powder";
-	case Wood: return "Wood";
+	case sand: return "Sand";
+	case water: return "Water";
+	case stone: return "Stone";
+	case lava: return "Lava";
+	case smoke: return "Smoke";
+	case cement: return "Cement";
+	case acid: return "Acid";
+	case oil: return "Oil";
+	case fire: return "Fire";
+	case gunpowder: return "Gun Powder";
+	case wood: return "Wood";
 	default: return "init";
 	}
 }
@@ -146,7 +142,7 @@ std::vector<Rectangle> Handle::createElementButtons(int width)
 	std::vector<Rectangle> buttons;
 	int xPos = 20, yPos = 200;
 
-	for (int i = 1; i < ElementCount; i++)
+	for (int i = 1; i < endType; i++)
 	{
 		buttons.push_back(Rectangle{ (float)width + xPos, (float)yPos, 30, 30 });
 
