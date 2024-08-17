@@ -63,7 +63,7 @@ void Handle::UIPanel(int width, int height, Color color)
 
 	DrawText("Reset", width + 50, 120, 20, WHITE);
 
-	const char* shape = (m_shape == 1) ? "Square" : "Circle";
+	const char* shape = (m_shape == 1) ? "Noise" : "Circle";
 	DrawText("Shape:", width + 50, 150, 20, WHITE);
 	DrawText(shape, width + 120, 150, 19, RAYWHITE);
 }
@@ -140,21 +140,26 @@ const char* Handle::getElementName(int type)
 std::vector<Rectangle> Handle::createElementButtons(int width)
 {
 	std::vector<Rectangle> buttons;
-	int xPos = 20, yPos = 200;
+	int columns = 5;
+	float xPos = 20, yPos = 200;
+	float buttonWidth = 30;
+	float buttonHeight = 30;
+	int padding = 20;
 
 	for (int i = 1; i < endType; i++)
 	{
-		buttons.push_back(Rectangle{ (float)width + xPos, (float)yPos, 30, 30 });
+		buttons.push_back(Rectangle{ (float)width + xPos, yPos, buttonWidth, buttonHeight });
 
-		xPos += 50;
-		if (i == 6) // TODO: refres
+		xPos += buttonWidth + padding;
+		if (i % columns == 0)
 		{
 			xPos = 20;
-			yPos = 250;
+			yPos += buttonHeight + padding;
 		}
 	}
 
 	return buttons;
 }
+
 
 

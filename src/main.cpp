@@ -3,7 +3,7 @@
 
 int main()
 {
-	const int CELL_SIZE = 3;
+	const int CELL_SIZE = 4;
 	const int WIDTH = 1300;
 	const int HEIGHT = 800;
 	const char* TITLE = "Sandbox.";
@@ -14,7 +14,7 @@ int main()
 	InitWindow(WIDTH, HEIGHT, TITLE);
 	SetTargetFPS(120);
 
-	int gridWidth = (WIDTH - 400);
+	int gridWidth = (WIDTH - 300);
 	int gridHeight = (HEIGHT);
 
 	Handle handle(gridWidth, gridHeight, CELL_SIZE);
