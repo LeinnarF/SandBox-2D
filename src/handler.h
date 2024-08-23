@@ -14,6 +14,7 @@ public:
 	void UIPanel(int width, int height, Color color);
 	void UIButton(int width);
 	bool isPressed(Vector2 mousePos, bool mousePress, Rectangle button);
+	void placeElement(int x, int y, int type); // for testing purposes
 
 	const char* getElementName(int type);
 	std::vector<Rectangle> createElementButtons(int width);

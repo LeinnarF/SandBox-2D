@@ -1,5 +1,6 @@
 #include <raylib.h>
 #include "handler.h"
+#include "elementEnum.h"
 
 int main()
 {

@@ -7,7 +7,7 @@
 
 
 Handle::Handle(int width, int height, int cellsize) :
-	m_grid(width, height, cellsize), m_type(sand), m_scale(2), m_shape(1)
+	m_grid(width, height, cellsize), m_type(sand), m_scale(1), m_shape(1)
 {}
 
 void Handle::Draw()
@@ -63,7 +63,7 @@ void Handle::UIPanel(int width, int height, Color color)
 
 	DrawText("Reset", width + 50, 120, 20, WHITE);
 
-	const char* shape = (m_shape == 1) ? "Noise" : "Circle";
+	const char* shape = (m_shape == 1) ? "Square" : "Circle";
 	DrawText("Shape:", width + 50, 150, 20, WHITE);
 	DrawText(shape, width + 120, 150, 19, RAYWHITE);
 }
@@ -116,6 +116,12 @@ bool Handle::isPressed(Vector2 mousePos, bool mousePress, Rectangle button)
 {
 	return CheckCollisionPointRec(mousePos, button) && mousePress;
 }
+
+void Handle::placeElement(int x, int y, int type)
+{
+	m_grid.addBlock(x, y, type, 1, m_shape);
+}
+
 
 const char* Handle::getElementName(int type)
 {
