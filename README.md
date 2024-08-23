@@ -2,7 +2,7 @@
 
 This project is a cellular automata sandbox written in C++ using the Raylib library. It simulates the behavior of various elements like sand, water, fire, oil, and more, allowing users to interact with and observe the different interactions between these elements.
 
-![Cellular Automata Sandbox](./resources/sandbox.gif)
+![Cellular Automata Sandbox](./resources/SandBox_gif.gif)
 
 ## Features
 
