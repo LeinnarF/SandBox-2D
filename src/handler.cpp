@@ -7,7 +7,7 @@
 
 
 Handle::Handle(int width, int height, int cellsize) :
-	m_grid(width, height, cellsize), m_type(sand), m_scale(1), m_shape(1)
+	m_grid(width, height, cellsize), m_type(sand), m_scale(2), m_shape(1)
 {}
 
 void Handle::Draw()
